@@ -21,7 +21,7 @@ const obtenerSiguienteId = () => {
 
 let siguienteId = obtenerSiguienteId();
 
-// ============= FUNCIONES AUXILIARES =============
+// ============ FUNCIONES AUXILIARES ============
 
     // Función para validar formato ISO 8601
     const validarFechaISO = (dateTime) => {
@@ -37,7 +37,7 @@ let siguienteId = obtenerSiguienteId();
         return !isNaN(fecha.getTime());
     };
 
-// ============= RUTAS CRUD =============
+// ============ RUTAS CRUD ============
 
     // READ - Obtener todos los eventos
     app.get("/api/eventos", (req, res) => {
@@ -166,7 +166,7 @@ let siguienteId = obtenerSiguienteId();
         });
     });
 
-// ============= INICIAR SERVIDOR =============
+// ============ INICIAR SERVIDOR ============
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
     console.log("\nPrueba estas rutas:");
