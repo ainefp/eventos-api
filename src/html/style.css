@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* --primary-color: #8fae68;
+  --secondary-color: #768465; */
+  --small-margin: 0.5rem;
+}
+
+.sm-margin-bottom {
+  margin-bottom: var(--small-margin);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e9e9e9;
+  padding: 2rem;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Tarjeta */
+  .card {
+    background-color: whitesmoke;
+    border: 2px solid black;
+    border-radius: 12px;
+    overflow: hidden;  /* Para que el contenido no se salga del contenedor por el b-radius */
+  }
+  .card-content {
+    padding: 1rem;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 250px;  /* 250 */
+    object-fit: cover;
+    margin-bottom: var(--small-margin);
+    padding: 0 !important;
+  }
+
+  .category{
+    display: inline-block;  /* span se comporta como bloque */
+    color: white;
+    padding: 0.5rem 1rem;
+    margin-bottom: var(--small-margin);
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* Categorías específicas */
+    .nature {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+  .card-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: var(--small-margin);
+  }
+
+  .card-description {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: var(--small-margin);
+  }
+
+  .event-date {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: #e9e9e9;
+    color: #555;
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border-left: 3px solid #667eea;
+  }
+
+  /* Contador */
+    .countdown-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid #e9e9e9;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+      background-color: #e9e9e9;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .countdown-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: #667eea;
+    }
+    .countdown-txt {
+      font-size: 0.75rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      }
+
+
+/* Diferentes tamaños de pantalla */
+  @media (max-width: 1024px) {
+    .cards-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .countdown-item {
+      padding: 0.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cards-container {
+      grid-template-columns: 1fr;
+    }
+    .countdown-item {
+      padding: 0.5rem;
+    }
+    .countdown-num {
+      font-size: 1.5rem;
+    }
+    .countdown-txt {
+      font-size: 0.7rem;
+    }
+  }
