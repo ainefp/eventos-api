@@ -54,18 +54,6 @@ function cargarCard(cardData) {
   cardsContainer.appendChild(div);
 }
 
-function crearCard() {
-  const nuevaCard = {
-    "id": 1,
-    "title": "",
-    "category": "",
-    "description": "",
-    "imgURL": "",
-    "dateTime": ""
-  };
-  cargarCard(nuevaCard);
-}
-
 function formatearFecha(fechaCard) {
   // Si se proporciona una fecha, conviértela a objeto Date
   const fecha = fechaCard ? new Date(fechaCard) : new Date();
