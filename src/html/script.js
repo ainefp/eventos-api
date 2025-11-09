@@ -30,28 +30,107 @@ function cargarCard(cardData) {
                       <img src="../assets/calendar-icon.svg" />
                       <span>${formatearFecha(cardData.dateTime)}</span>
                     </div>
-                    <div class="countdown-area">
+                    <div class="countdown-area" data-datetime="${cardData.dateTime}">
                       <div class="countdown-item">
-                        <span class="countdown-num"> 09 </span>
+                        <span class="countdown-num" data-unit="days">--</span>
                         <span class="countdown-txt"> Días </span>
                       </div>
                       <div class="countdown-item">
-                        <span class="countdown-num"> 01 </span>
+                        <span class="countdown-num" data-unit="hours">--</span>
                         <span class="countdown-txt"> Horas </span>
                       </div>
                       <div class="countdown-item">
-                        <span class="countdown-num"> 45 </span>
+                        <span class="countdown-num" data-unit="minutes">--</span>
                         <span class="countdown-txt"> Minutos </span>
                       </div>
                       <div class="countdown-item">
-                        <span class="countdown-num"> 22 </span>
+                        <span class="countdown-num" data-unit="seconds">--</span>
                         <span class="countdown-txt"> Segundos </span>
                       </div>
                     </div>
                   </div>
                 </div>`;
-  
+
   cardsContainer.appendChild(div);
+
+  // Countdown para esta tarjeta
+  const countdown = div.querySelector('.countdown-area');
+  if (countdown) iniciarCtdwn(countdown);
+}
+
+function iniciarCtdwn(countdown) {
+  const cardCont = document.querySelector(".card");
+  const dateAttr = countdown.getAttribute('data-datetime');
+  if (!dateAttr) {
+    errorCtdwn(countdown, 'Fecha no proporcionada');
+    return;
+  }
+
+  const date = new Date(dateAttr);
+  if (isNaN(date.getTime())) {
+    errorCtdwn(countdown, 'Fecha inválida');
+    return;
+  }
+
+  function tick() {
+    actualizarCtdwn(countdown, date);
+    if (countdown.classList.contains('terminado')) {
+      cardCont.classList.add('terminado');
+    }
+  }
+
+  tick();
+  const id = setInterval(tick, 1000);
+  countdown.dataset.intervalId = id;
+}
+
+function actualizarCtdwn(countdown, dateFinal) {
+  let res = dateFinal.getTime() - new Date().getTime();
+
+  if (res <= 0) {
+    // Evento iniciado o fecha pasada
+    mostrarCtdwnAct(countdown, 0, 0, 0, 0);
+    // limpiar intervalo si existe
+    if (countdown.dataset.intervalId) {
+      clearInterval(Number(countdown.dataset.intervalId));
+      delete countdown.dataset.intervalId;
+    }
+    countdown.classList.add('terminado');
+    return;
+  }
+
+  const seconds = Math.floor(res / 1000) % 60;
+  const minutes = Math.floor(res / (1000 * 60)) % 60;
+  const hours = Math.floor(res / (1000 * 60 * 60)) % 24;
+  const days = Math.floor(res / (1000 * 60 * 60 * 24));
+
+  mostrarCtdwnAct(countdown, days, hours, minutes, seconds);
+}
+
+function mostrarCtdwnAct(countdown, days, hours, minutes, seconds) {
+  const map = {
+    days,
+    hours,
+    minutes,
+    seconds
+  };
+
+  Object.keys(map).forEach(unit => {
+    const du = countdown.querySelector(`[data-unit="${unit}"]`);
+    if (du) {
+      // Los días pueden tener más de 2 dígitos; horas/minutos/segundos se paddean a 2
+      du.textContent = unit === 'days' ? String(map[unit]) : pad(map[unit], 2);
+    }
+  });
+}
+
+function errorCtdwn(countdown, message) {
+  countdown.querySelectorAll('.countdown-num').forEach(el => el.textContent = '--');
+  countdown.title = message;
+}
+
+function pad(num, size) {
+  return String(num).padStart(size, '0');
 }
 
 function formatearFecha(fechaCard) {
