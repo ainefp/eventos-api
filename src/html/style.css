@@ -56,6 +56,11 @@ body {
     letter-spacing: 2px;
   }
 
+  .terminado {
+    opacity: 0.8;
+    filter: grayscale(100%);
+  }
+
   /* Categorías específicas */
     .nature {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
