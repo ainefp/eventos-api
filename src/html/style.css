@@ -1,9 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-/* Variables personalizadas */
+/* ======== VARIABLES PERSONALIZADAS ======== */
+
   :root {
     --small-margin: 0.5rem;
   }
@@ -44,23 +40,32 @@
     --ctdwn-color: #0f2027;
   }
 
-.sm-margin-bottom {
-  margin-bottom: var(--small-margin);
-}
+/* ======== ESTILOS GENERALES ======== */
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #e9e9e9;
-  padding: 2rem;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #e9e9e9;
+    padding: 2rem;
+  }
 
-/* Tarjeta */
+  .sm-margin-bottom {
+    margin-bottom: var(--small-margin);
+  }
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+/* ======== TARJETA ======== */
+
   .card {
     background-color: whitesmoke;
     border: 2px solid black;
@@ -73,7 +78,7 @@ body {
 
   .card-img {
     width: 100%;
-    height: 250px;  /* 250 */
+    height: 250px;
     object-fit: cover;
     margin-bottom: var(--small-margin);
     padding: 0 !important;
@@ -158,7 +163,8 @@ body {
       }
 
 
-/* Diferentes tamaños de pantalla */
+/* =========== DIFERENTES TAMAÑOS DE PANTALLA =========== */
+
   @media (max-width: 1024px) {
     .cards-container {
       grid-template-columns: repeat(2, 1fr);
